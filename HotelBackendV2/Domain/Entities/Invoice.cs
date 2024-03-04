@@ -5,5 +5,5 @@ public record Invoice(
     DateTime InvoiceDate,
     DateTime CreatedOn,
     string InvoiceNumber,
-    Actvitiy[] Activities
+    Activity[] Activities
 );
