@@ -1,5 +1,5 @@
 using System.Collections;
-
+namespace Domain.Entities;
 public record Invoice(
     Guid Id,
     DateTime InvoiceDate,

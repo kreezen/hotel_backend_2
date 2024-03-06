@@ -1,5 +1,6 @@
+namespace Domain.Entities;
 public enum CustomerType
 {
-    Person, 
+    Person,
     Company
 }

@@ -1,4 +1,5 @@
 
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repositories
@@ -12,19 +13,19 @@ namespace DataAccess.Repositories
             _dbContext = context;
         }
 
-        public async Task<IEnumerable<Activity?>> GetTaskByUserAsync(User user)
+        public async Task<IEnumerable<Taskk?>> GetTaskByUserAsync(User user)
         {
             return await _dbContext.Tasks
                 .Include(t => t.AssignedTo)
                 .Where(t => t.AssignedTo == user).ToListAsync();
         }
 
-        public async Task<IEnumerable<Activity>> GetTasksAsync()
+        public async Task<IEnumerable<Taskk>> GetTasksAsync()
         {
             return await _dbContext.Tasks.ToListAsync();
         }
 
-        public async Task<Activity> CreateTaskAsync(Task task)
+        public async Task<Taskk> CreateTaskAsync(Taskk task)
         {
             task.CreatedOn = DateTime.UtcNow;
             task.ModifiedOn = DateTime.UtcNow;
