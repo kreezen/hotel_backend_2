@@ -1,1 +1,0 @@
-public record Adress(string Street, string City, string ZipCode);
