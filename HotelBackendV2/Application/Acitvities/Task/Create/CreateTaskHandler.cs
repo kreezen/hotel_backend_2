@@ -1,9 +1,11 @@
+using Application.Abstractions.Messaging;
+using Application.Abstractions.Repositories;
 using Domain.Entities;
-using MediatR;
+using SharedKernel;
 
 namespace Application.Task.Create
 {
-    public class CreateTaskHandler : IRequestHandler<CreateTaskCommand, Taskk>
+    public class CreateTaskHandler : ICommandHandler<CreateTaskCommand, Taskk>
     {
         private readonly ITaskRepository _taskRepository;
         public CreateTaskHandler(ITaskRepository taskRepository)
@@ -11,7 +13,7 @@ namespace Application.Task.Create
             _taskRepository = taskRepository;
         }
 
-        public async Task<Taskk> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
+        public async Task<Result<Taskk>> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
         {
             var task = new Taskk
             {

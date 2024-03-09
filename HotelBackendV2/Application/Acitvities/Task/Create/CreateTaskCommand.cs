@@ -1,9 +1,10 @@
+using Application.Abstractions.Messaging;
 using Domain.Entities;
-using MediatR;
+
 
 namespace Application.Task.Create
 {
-    public class CreateTaskCommand : IRequest<Taskk>
+    public class CreateTaskCommand : ICommand<Taskk>
     {
         public required string Description { get; set; }
         public DateTime CreatedOn { get; set; }

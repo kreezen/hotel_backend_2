@@ -1,4 +1,4 @@
-namespace Domain.Entities;
+namespace Domain.Customer;
 public class Debitor : Customer
 {
     public required string DebitorNumber { get; set; }

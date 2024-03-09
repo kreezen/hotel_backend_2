@@ -1,4 +1,5 @@
 
+using Application.Abstractions.Repositories;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +14,7 @@ namespace DataAccess.Repositories
             _dbContext = context;
         }
 
-        public async Task<IEnumerable<Taskk?>> GetTaskByUserAsync(User user)
+        public async Task<IEnumerable<Taskk?>> GetTasksByUserAsync(User user)
         {
             return await _dbContext.Tasks
                 .Include(t => t.AssignedTo)

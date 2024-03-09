@@ -1,4 +1,4 @@
-namespace Domain.Entities;
+namespace Domain.Customer;
 public class Customer
 {
     public Guid Id { get; set; }
