@@ -1,4 +1,6 @@
-namespace Domain.Entities;
+using Domain.Users;
+
+namespace Domain.Activities;
 public class Activity
 {
     public required string Description { get; set; }

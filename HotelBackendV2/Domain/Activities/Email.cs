@@ -1,4 +1,4 @@
-namespace Domain.Entities;
+namespace Domain.Activities;
 public class Email : Activity
 {
     public required string From { get; set; }

@@ -1,11 +1,10 @@
-using Application.Abstractions.Messaging;
-using Application.Abstractions.Repositories;
-using Domain.Entities;
+
+
 using SharedKernel;
+using Task = Domain.Activities.Task;
 
-namespace Application.Task.GetByUser;
 
-public class GetByUserQueryHandler : IQueryHandler<GetByUserQuery, IEnumerable<Taskk>>
+public class GetByUserQueryHandler : IQueryHandler<GetByUserQuery, IEnumerable<Task>>
 {
     private readonly ITaskRepository _taskRepository;
 
@@ -14,14 +13,14 @@ public class GetByUserQueryHandler : IQueryHandler<GetByUserQuery, IEnumerable<T
         _taskRepository = taskRepository;
     }
 
-    public async Task<Result<IEnumerable<Taskk>>> Handle(GetByUserQuery request, CancellationToken cancellationToken)
+    public async Task<Result<IEnumerable<Task>>> Handle(GetByUserQuery request, CancellationToken cancellationToken)
     {
         var tasks = await _taskRepository.GetTasksByUserAsync(request.User);
         if (tasks == null)
         {
-            return (Result<IEnumerable<Taskk>>)Result.Failure(Error.NotFound("Tasks.NotFound", "Tasks not found"));
+            return (Result<IEnumerable<Task>>)Result.Failure(Error.NotFound("Tasks.NotFound", "Tasks not found"));
         }
-        return (Result<IEnumerable<Taskk>>)tasks;
+        return (Result<IEnumerable<Task>>)tasks;
 
     }
 }

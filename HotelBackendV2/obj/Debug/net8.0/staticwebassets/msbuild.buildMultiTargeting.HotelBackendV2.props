@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\HotelBackendV2.props" />
+</Project>

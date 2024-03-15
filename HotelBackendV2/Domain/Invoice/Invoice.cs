@@ -1,4 +1,5 @@
 using System.Collections;
+using Domain.Activities;
 namespace Domain.Invoice;
 public record Invoice(
     Guid Id,

@@ -1,10 +1,11 @@
-using Domain.Entities;
-namespace Application.Abstractions.Repositories;
+using Domain.Users;
+using Task = Domain.Activities.Task;
+
 
 public interface ITaskRepository
 {
-    Task<IEnumerable<Taskk?>> GetTasksByUserAsync(User user);
-    Task<IEnumerable<Taskk>> GetTasksAsync();
-    Task<Taskk> CreateTaskAsync(Taskk task);
+    Task<IEnumerable<Task?>> GetTasksByUserAsync(User user);
+    Task<IEnumerable<Task>> GetTasksAsync();
+    Task<Task> CreateTaskAsync(Task task);
 
 }

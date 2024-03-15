@@ -1,13 +1,10 @@
-using Application.Abstractions.Messaging;
-using Domain.Entities;
-using MediatR;
-using SharedKernel;
+
+using Domain.Users;
+using Task = Domain.Activities.Task;
 
 
-namespace Application.Task.GetByUser
+public class GetByUserQuery : IQuery<IEnumerable<Task>>
 {
-    public class GetByUserQuery : IQuery<IEnumerable<Taskk>>
-    {
-        public required User User { get; set; }
-    }
+    public required User User { get; set; }
 }
+
