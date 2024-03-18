@@ -1,10 +1,12 @@
-using System.Collections;
+
 using Domain.Activities;
 namespace Domain.Invoice;
-public record Invoice(
-    Guid Id,
-    DateTime InvoiceDate,
-    DateTime CreatedOn,
-    string InvoiceNumber,
-    Activity[] Activities
-);
+public class Invoice
+{
+    public Guid Id { get; set; }
+    public DateTime InvoiceDate { get; set; }
+    public DateTime CreatedOn { get; set; }
+    public required string InvoiceNumber { get; set; }
+    public required List<Activity> Activities { get; set; }
+}
+

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 public class UserRepository : IUserRepository
 {
     private readonly HotelDbContext _dbContext;
-    UserRepository(HotelDbContext dbContext)
+    public UserRepository(HotelDbContext dbContext)
     {
         _dbContext = dbContext;
     }

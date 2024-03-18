@@ -5,7 +5,7 @@ using SharedKernel;
 public class CreateUserHandler : ICommandHandler<CreateUserCommand, User>
 {
     private readonly IUserRepository _userRepository;
-    CreateUserHandler(IUserRepository userRepository)
+    public CreateUserHandler(IUserRepository userRepository)
     {
         _userRepository = userRepository;
     }

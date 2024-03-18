@@ -100,3 +100,4 @@ C:\Users\vonVon\hotel_backend_v2\HotelBackendV2\obj\Debug\net8.0\refint\HotelBac
 C:\Users\vonVon\hotel_backend_v2\HotelBackendV2\obj\Debug\net8.0\HotelBackendV2.pdb
 C:\Users\vonVon\hotel_backend_v2\HotelBackendV2\obj\Debug\net8.0\HotelBackendV2.genruntimeconfig.cache
 C:\Users\vonVon\hotel_backend_v2\HotelBackendV2\obj\Debug\net8.0\ref\HotelBackendV2.dll
+C:\Users\vonVon\hotel_backend_v2\HotelBackendV2\obj\Debug\net8.0\HotelBackendV2.sourcelink.json

@@ -8,7 +8,7 @@ public class GetByUserQueryHandler : IQueryHandler<GetByUserQuery, IEnumerable<T
 {
     private readonly ITaskRepository _taskRepository;
 
-    GetByUserQueryHandler(ITaskRepository taskRepository)
+    public GetByUserQueryHandler(ITaskRepository taskRepository)
     {
         _taskRepository = taskRepository;
     }

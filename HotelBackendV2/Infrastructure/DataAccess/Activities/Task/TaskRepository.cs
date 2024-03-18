@@ -34,5 +34,18 @@ public class TaskRepository : ITaskRepository
         await _dbContext.SaveChangesAsync();
         return task;
     }
+
+    public async Task<Task> updateTaskAsync(Task task)
+    {
+        _dbContext.Update(task);
+        await _dbContext.SaveChangesAsync();
+        return task;
+    }
+
+    public async Task<Task?> getTaskByIdAsync(Guid id)
+    {
+        return await _dbContext.Tasks.FirstOrDefaultAsync(t => t.CustomerId == id);
+    }
+
 }
 

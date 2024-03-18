@@ -1,2 +1,2 @@
 namespace Domain.Customer;
-public record Address(string Street, string City, string ZipCode);
+public record Address(Guid Id, string Street, string City, string ZipCode);

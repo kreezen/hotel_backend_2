@@ -20,7 +20,7 @@ public class CreateCustomerHandler : ICommandHandler<CreateCustomerCommand, Cust
         {
             Id = Guid.NewGuid(),
             CustomerNumber = Guid.NewGuid().ToString(),
-            Activities = Array.Empty<Activity>(),
+            Activities = new List<Activity>(),
             CustomerType = request.CustomerType,
             FirstName = request.FirstName,
             LastName = request.LastName,

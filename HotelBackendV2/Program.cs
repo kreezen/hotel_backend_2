@@ -7,16 +7,36 @@ using SharedKernel;
 var builder = WebApplication.CreateBuilder(args);
 builder.ConfigureMinimalApi(services: builder.Services);
 var app = builder.Build();
+app.UseCors();
 
-app.MapGet("/", () => "Hello World!");
-app.MapPost("api/users", async (CreateUserCommand command, ISender sender) =>
+app.MapPost("api/users/create", async (CreateUserCommand command, ISender sender) =>
 {
-    Result<User> result = await sender.Send(command);
+    var result = await sender.Send(command);
     return result.IsSuccess ? Results.Ok(result.Value) : result.ToProblemDetails();
 });
-app.MapGet("api/users/{username}", async (GetByUsernameQuery command, ISender sender) =>
+
+app.MapGet("api/users/{username}", async (String username, ISender sender) =>
 {
-    Result<User> result = await sender.Send(command);
+    var query = new GetByUsernameQuery
+    {
+        Username = username
+    };
+    var result = await sender.Send(query);
     return result.IsSuccess ? Results.Ok(result.Value) : result.ToProblemDetails();
 });
+
+app.MapPost("api/customers/create", async (CreateCustomerCommand command, ISender sender) =>
+{
+    var result = await sender.Send(command);
+    return result.IsSuccess ? Results.Ok(result.Value) : result.ToProblemDetails();
+});
+
+app.MapGet("api/customers", async (ISender sender) =>
+{
+    var query = new GetAllCustomersQuery();
+    var result = await sender.Send(query);
+    return result.IsSuccess ? Results.Ok(result.Value) : result.ToProblemDetails();
+});
+
+
 app.Run();
