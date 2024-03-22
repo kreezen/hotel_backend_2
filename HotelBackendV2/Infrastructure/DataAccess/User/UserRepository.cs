@@ -10,7 +10,7 @@ public class UserRepository : IUserRepository
         _dbContext = dbContext;
     }
 
-    public async Task<bool> doesUsernameExistAsync(string username)
+    public async Task<bool> DoesUsernameExistAsync(string username)
     {
         return await _dbContext.Users.AnyAsync(x => x.Username == username);
     }
@@ -30,5 +30,11 @@ public class UserRepository : IUserRepository
     public async Task<User?> GetByIdAsync(Guid id)
     {
         return await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == id);
+    }
+
+    public async Task<List<User>> GetUsersBySubstringAsync(string substring)
+    {
+        var users = await _dbContext.Users.Where(x => x.Username.Contains(substring)).ToListAsync();
+        return users;
     }
 }

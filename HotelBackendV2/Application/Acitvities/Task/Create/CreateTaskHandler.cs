@@ -1,6 +1,7 @@
 
 using Task = Domain.Activities.Task;
 using SharedKernel;
+using System.Data;
 
 public class CreateTaskHandler : ICommandHandler<CreateTaskCommand, Task>
 {
@@ -15,8 +16,8 @@ public class CreateTaskHandler : ICommandHandler<CreateTaskCommand, Task>
         var task = new Task
         {
             Description = request.Description,
-            CreatedOn = request.CreatedOn,
-            ModifiedOn = request.ModifiedOn,
+            CreatedOn = DateTime.Now,
+            ModifiedOn = DateTime.Now,
             CreatedBy = request.CreatedBy,
             ModifiedBy = request.ModifiedBy,
             IsCompleted = request.IsCompleted,

@@ -13,7 +13,7 @@ public class CustomerRepository : ICustomerRepository
     {
         var gId = Guid.NewGuid();
         customer.Id = gId;
-        customer.CustomerNumber = gId.ToString();
+        customer.Customernumber = gId.ToString();
         _dbContext.Customers.Add(customer);
         await _dbContext.SaveChangesAsync();
         return customer;
@@ -24,8 +24,13 @@ public class CustomerRepository : ICustomerRepository
         return _dbContext.Customers.Include(x => x.Activities).Include(x => x.Address).ToListAsync();
     }
 
-    public Task<Customer?> GetCustomerByCustomerNumberAsync(string customerNumber)
+    public async Task<Customer?> GetCustomerByCustomerNumberAsync(string customerNumber)
     {
-        return _dbContext.Customers.FirstOrDefaultAsync(x => x.CustomerNumber == customerNumber);
+        return await _dbContext.Customers.FirstOrDefaultAsync(x => x.Customernumber == customerNumber);
+    }
+
+    public async Task<List<Customer>> GetCustomersBySubstringAsync(string substring)
+    {
+        return await _dbContext.Customers.Where(x => x.Customernumber.Contains(substring)).ToListAsync();
     }
 }
