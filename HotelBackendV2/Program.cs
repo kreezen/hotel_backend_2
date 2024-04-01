@@ -35,6 +35,12 @@ app.MapGet("api/users/search/{username}", async (String username, ISender sender
     return result.IsSuccess ? Results.Ok(result.Value) : result.ToProblemDetails();
 });
 
+app.MapPost("api/activities/task/create", async (CreateTaskCommand command, ISender sender) =>
+{
+    var result = await sender.Send(command);
+    return result.IsSuccess ? Results.Ok(result.Value) : result.ToProblemDetails();
+});
+
 app.MapGet("api/customers/search/{name}", async (String name, ISender sender) =>
 {
     var query = new SearchByCustomerQuery

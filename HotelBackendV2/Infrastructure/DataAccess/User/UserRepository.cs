@@ -37,4 +37,6 @@ public class UserRepository : IUserRepository
         var users = await _dbContext.Users.Where(x => x.Username.Contains(substring)).ToListAsync();
         return users;
     }
+
+    public Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<User> AttachUser(User user) => _dbContext.Users.Attach(user);
 }

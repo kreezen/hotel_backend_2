@@ -19,11 +19,11 @@ public class CreateCustomerHandler : ICommandHandler<CreateCustomerCommand, Cust
         var customer = new Customer
         {
             Id = Guid.NewGuid(),
-            Customernumber = Guid.NewGuid().ToString(),
+            CustomerNumber = Guid.NewGuid().ToString(),
             Activities = new List<Activity>(),
             CustomerType = request.CustomerType,
-            Firstname = request.FirstName,
-            Lastname = request.LastName,
+            FirstName = request.FirstName,
+            LastName = request.LastName,
             Address = request.Address
         };
 

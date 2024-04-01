@@ -5,7 +5,6 @@ namespace Domain.Activities;
 public class Activity
 {
     public Guid Id { get; set; }
-    public Guid CustomerId { get; set; }
     public required string Description { get; set; }
     public DateTime CreatedOn { get; set; }
     public DateTime ModifiedOn { get; set; }

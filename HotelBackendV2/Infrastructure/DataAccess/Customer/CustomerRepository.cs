@@ -13,24 +13,47 @@ public class CustomerRepository : ICustomerRepository
     {
         var gId = Guid.NewGuid();
         customer.Id = gId;
-        customer.Customernumber = gId.ToString();
+        customer.CustomerNumber = gId.ToString();
         _dbContext.Customers.Add(customer);
         await _dbContext.SaveChangesAsync();
         return customer;
     }
 
-    public Task<List<Customer>> GetAllCustomersAsync()
+    public async Task<List<Customer>> GetAllCustomersAsync()
     {
-        return _dbContext.Customers.Include(x => x.Activities).Include(x => x.Address).ToListAsync();
+
+
+        var tasks = await _dbContext.Tasks.Include(x => x.CreatedBy).ToListAsync();
+
+        Console.WriteLine("task:");
+        Console.WriteLine(tasks.Count);
+
+        var customers = await _dbContext.Customers
+    .Include(t => t.Activities)
+    .ToListAsync();
+
+        // Filter Activities as needed (in-memory) afterwards
+        foreach (var customer in customers)
+        {
+            customer.Activities = customer.Activities.Where(x => x.CustomerId == customer.Id).ToList();
+        }
+
+        var filteredCustomers = customers.Where(t => t.Activities.Any(x => x.CustomerId == t.Id))
+            .ToList(); // Filter based on activity criteria
+
+        Console.WriteLine(filteredCustomers[0].Activities.Count);
+        Console.WriteLine(filteredCustomers[0].Activities.Count);
+
+        return filteredCustomers ?? new List<Customer>();
     }
 
     public async Task<Customer?> GetCustomerByCustomerNumberAsync(string customerNumber)
     {
-        return await _dbContext.Customers.FirstOrDefaultAsync(x => x.Customernumber == customerNumber);
+        return await _dbContext.Customers.FirstOrDefaultAsync(x => x.CustomerNumber == customerNumber);
     }
 
     public async Task<List<Customer>> GetCustomersBySubstringAsync(string substring)
     {
-        return await _dbContext.Customers.Where(x => x.Customernumber.Contains(substring)).ToListAsync();
+        return await _dbContext.Customers.Where(x => x.CustomerNumber.Contains(substring)).ToListAsync();
     }
 }
