@@ -28,9 +28,15 @@ public class TaskRepository : ITaskRepository
     public async Task<Task> CreateTaskAsync(Task task)
     {
         _dbContext.Tasks.Add(task);
-        _dbContext.Activities.Add(task);
         await _dbContext.SaveChangesAsync();
         return task;
+    }
+
+    public async Task<List<Task>> GetAllTaksAsync()
+    {
+        var tasks = await _dbContext.Tasks.Include(t => t.CreatedBy)
+        .Include(t => t.ModifiedBy).ToListAsync();
+        return tasks;
     }
 
     public async Task<Task> updateTaskAsync(Task task)
@@ -42,6 +48,7 @@ public class TaskRepository : ITaskRepository
 
     public async Task<Task?> getTaskByIdAsync(Guid id)
     {
+        Console.WriteLine("id: " + id);
         return await _dbContext.Tasks.FirstOrDefaultAsync(t => t.CustomerId == id);
     }
 

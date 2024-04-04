@@ -1,5 +1,7 @@
 using Domain.Customer;
+using Domain.Activities;
 using Microsoft.EntityFrameworkCore;
+using Task = Domain.Activities.Task;
 
 public class CustomerRepository : ICustomerRepository
 {
@@ -22,29 +24,28 @@ public class CustomerRepository : ICustomerRepository
     public async Task<List<Customer>> GetAllCustomersAsync()
     {
 
-
-        var tasks = await _dbContext.Tasks.Include(x => x.CreatedBy).ToListAsync();
-
-        Console.WriteLine("task:");
-        Console.WriteLine(tasks.Count);
-
         var customers = await _dbContext.Customers
-    .Include(t => t.Activities)
-    .ToListAsync();
+        .Include(t => t.Activities)
+        .Include(t => t.Address)
+        .ToListAsync(); // Fetch data
 
-        // Filter Activities as needed (in-memory) afterwards
+        // Then fetch CreatedBy for specific types:
         foreach (var customer in customers)
         {
-            customer.Activities = customer.Activities.Where(x => x.CustomerId == customer.Id).ToList();
+            // For Tasks 
+            _dbContext.Entry(customer).Collection(c => c.Activities).Query()
+                      .OfType<Task>()
+                      .Include(t => t.ModifiedBy)
+                      .Load();
+
+            // For Emails
+            _dbContext.Entry(customer).Collection(c => c.Activities).Query()
+                      .OfType<Email>()
+                      .Include(e => e.CreatedBy)
+                      .Load();
         }
 
-        var filteredCustomers = customers.Where(t => t.Activities.Any(x => x.CustomerId == t.Id))
-            .ToList(); // Filter based on activity criteria
-
-        Console.WriteLine(filteredCustomers[0].Activities.Count);
-        Console.WriteLine(filteredCustomers[0].Activities.Count);
-
-        return filteredCustomers ?? new List<Customer>();
+        return customers;
     }
 
     public async Task<Customer?> GetCustomerByCustomerNumberAsync(string customerNumber)
@@ -54,6 +55,6 @@ public class CustomerRepository : ICustomerRepository
 
     public async Task<List<Customer>> GetCustomersBySubstringAsync(string substring)
     {
-        return await _dbContext.Customers.Where(x => x.CustomerNumber.Contains(substring)).ToListAsync();
+        return await _dbContext.Customers.Where(x => x.LastName.ToLower().Contains(substring.ToLower())).ToListAsync();
     }
 }

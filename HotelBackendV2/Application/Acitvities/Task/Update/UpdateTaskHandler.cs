@@ -18,17 +18,25 @@ public class UpdateTaskHandler : ICommandHandler<UpdateTaskCommand, Task>
             return (Result<Task>)Result.Failure(Error.NotFound("Task.NotFound", "Task not found"));
         }
 
-        var updatedTask = new Task
+        oldTask.ModifiedOn = DateTime.UtcNow;
+        oldTask.Description = request.Description;
+        oldTask.ModifiedBy = request.ModifiedBy;
+        oldTask.DueDate = request.DueDate;
+        oldTask.AssignedTo = request.AssignedTo;
+        oldTask.IsCompleted = request.IsCompleted;
+
+        /* var updatedTask = new Task
         {
+            Id = oldTask.Id,
             Description = request.Description,
             ModifiedBy = request.ModifiedBy,
             CreatedBy = oldTask.CreatedBy,
-            ModifiedOn = DateTime.Now,
+            ModifiedOn = DateTime.UtcNow,
             DueDate = request.DueDate,
             AssignedTo = request.AssignedTo,
             IsCompleted = request.IsCompleted
-        };
+        }; */
 
-        return await _taskRepository.updateTaskAsync(updatedTask);
+        return await _taskRepository.updateTaskAsync(oldTask);
     }
 }

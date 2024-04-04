@@ -32,7 +32,7 @@ public class HotelDbContext : DbContext
                     .HasForeignKey(a => a.CustomerId);
 
         // Relationships between Customer and derived Activity types
-        modelBuilder.Entity<Task>()
+        /* modelBuilder.Entity<Task>()
                     .HasOne<Customer>()
                     .WithMany()
                     .HasForeignKey(t => t.CustomerId);
@@ -40,7 +40,7 @@ public class HotelDbContext : DbContext
         modelBuilder.Entity<Email>()
                     .HasOne<Customer>()
                     .WithMany()
-                    .HasForeignKey(e => e.CustomerId);
+                    .HasForeignKey(e => e.CustomerId); */
     }
 
 }

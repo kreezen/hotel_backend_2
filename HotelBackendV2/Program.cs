@@ -41,6 +41,19 @@ app.MapPost("api/activities/task/create", async (CreateTaskCommand command, ISen
     return result.IsSuccess ? Results.Ok(result.Value) : result.ToProblemDetails();
 });
 
+app.MapGet("api/activities/task", async (ISender sender) =>
+{
+    var command = new GetAllTaskQuery();
+    var result = await sender.Send(command);
+    return result.IsSuccess ? Results.Ok(result.Value) : result.ToProblemDetails();
+});
+
+app.MapPost("api/activities/task/update", async (UpdateTaskCommand command, ISender sender) =>
+{
+    var result = await sender.Send(command);
+    return result.IsSuccess ? Results.Ok(result.Value) : result.ToProblemDetails();
+});
+
 app.MapGet("api/customers/search/{name}", async (String name, ISender sender) =>
 {
     var query = new SearchByCustomerQuery

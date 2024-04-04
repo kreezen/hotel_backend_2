@@ -9,5 +9,6 @@ public interface ITaskRepository
     Task<Task> CreateTaskAsync(Task task);
     Task<Task?> getTaskByIdAsync(Guid id);
     Task<Task> updateTaskAsync(Task task);
+    Task<List<Task>> GetAllTaksAsync();
 
 }

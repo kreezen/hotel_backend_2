@@ -7,5 +7,4 @@ public class Task : Activity
     public DateTime DueDate { get; set; }
     public bool IsCompleted { get; set; }
 
-
 }

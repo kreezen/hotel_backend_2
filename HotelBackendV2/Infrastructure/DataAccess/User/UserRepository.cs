@@ -34,7 +34,7 @@ public class UserRepository : IUserRepository
 
     public async Task<List<User>> GetUsersBySubstringAsync(string substring)
     {
-        var users = await _dbContext.Users.Where(x => x.Username.Contains(substring)).ToListAsync();
+        var users = await _dbContext.Users.Where(x => x.Username.ToLower().Contains(substring.ToLower())).ToListAsync();
         return users;
     }
 
