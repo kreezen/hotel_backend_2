@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HotelBackendV2.Migrations
 {
     [DbContext(typeof(HotelDbContext))]
-    [Migration("20240401160609_InitialMigration")]
+    [Migration("20240414171604_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />

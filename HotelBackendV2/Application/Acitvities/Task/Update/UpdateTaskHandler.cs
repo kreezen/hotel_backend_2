@@ -12,7 +12,7 @@ public class UpdateTaskHandler : ICommandHandler<UpdateTaskCommand, Task>
     public async Task<Result<Task>> Handle(UpdateTaskCommand request, CancellationToken cancellationToken)
     {
 
-        var oldTask = await _taskRepository.getTaskByIdAsync(request.CustomerId);
+        var oldTask = await _taskRepository.getTaskByIdAsync(request.Id);
         if (oldTask == null)
         {
             return (Result<Task>)Result.Failure(Error.NotFound("Task.NotFound", "Task not found"));

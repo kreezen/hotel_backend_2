@@ -48,8 +48,7 @@ public class TaskRepository : ITaskRepository
 
     public async Task<Task?> getTaskByIdAsync(Guid id)
     {
-        Console.WriteLine("id: " + id);
-        return await _dbContext.Tasks.FirstOrDefaultAsync(t => t.CustomerId == id);
+        return await _dbContext.Tasks.FirstOrDefaultAsync(t => t.Id == id);
     }
 
 }

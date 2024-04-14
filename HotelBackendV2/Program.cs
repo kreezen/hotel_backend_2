@@ -1,8 +1,7 @@
 
 
-using Domain.Users;
 using MediatR;
-using SharedKernel;
+
 
 var builder = WebApplication.CreateBuilder(args);
 builder.ConfigureMinimalApi(services: builder.Services);
