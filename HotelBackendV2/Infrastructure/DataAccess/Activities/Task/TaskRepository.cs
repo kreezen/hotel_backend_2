@@ -35,18 +35,16 @@ public class TaskRepository : ITaskRepository
     public async Task<List<Task>> GetAllTaksAsync()
     {
         var tasks = await _dbContext.Tasks.Include(t => t.CreatedBy)
-        .Include(t => t.ModifiedBy).ToListAsync();
+        .Include(t => t.ModifiedBy).Include(t => t.AssignedTo).ToListAsync();
         return tasks;
     }
 
-    public async Task<Task> updateTaskAsync(Task task)
+    public async Task<int> SaveChangesAsync()
     {
-        _dbContext.Update(task);
-        await _dbContext.SaveChangesAsync();
-        return task;
+        return await _dbContext.SaveChangesAsync();
     }
 
-    public async Task<Task?> getTaskByIdAsync(Guid id)
+    public async Task<Task?> GetTaskByIdAsync(Guid id)
     {
         return await _dbContext.Tasks.FirstOrDefaultAsync(t => t.Id == id);
     }

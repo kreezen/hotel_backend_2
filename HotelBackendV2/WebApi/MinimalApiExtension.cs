@@ -6,7 +6,7 @@ public static class MinimalApiExtension
     public static void ConfigureMinimalApi(this WebApplicationBuilder builder, IServiceCollection services)
     {
         var cs = builder.Configuration.GetConnectionString("DefaultConnection");
-        builder.Services.AddDbContext<HotelDbContext>(options => options.UseNpgsql(cs));
+        builder.Services.AddDbContext<HotelDbContext>(options => options.UseNpgsql(cs).EnableDetailedErrors());
         services.AddMediatR(config =>
         {
             config.RegisterServicesFromAssembly(typeof(MinimalApiExtension).Assembly);

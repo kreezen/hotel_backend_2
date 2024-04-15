@@ -16,6 +16,13 @@ public class CreateTaskHandler : ICommandHandler<CreateTaskCommand, Task>
 
     public async Task<Result<Task>> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
     {
+        var createdBy = await _userRepository.GetByIdAsync(request.CreatedBy.Id);
+        var assignedTo = await _userRepository.GetByIdAsync(request.AssignedTo.Id);
+
+        if (createdBy == null || assignedTo == null)
+        {
+            return (Result<Task>)Result.Failure(Error.NotFound("User.NotFound", "User not found"));
+        }
 
         var task = new Task
         {
@@ -23,11 +30,10 @@ public class CreateTaskHandler : ICommandHandler<CreateTaskCommand, Task>
             Description = request.Description,
             CreatedOn = DateTime.UtcNow,
             ModifiedOn = DateTime.UtcNow,
-            CreatedBy = _userRepository.AttachUser(request.CreatedBy).Entity,
-            ModifiedBy = request.CreatedBy,
+            CreatedBy = createdBy,
+            ModifiedBy = createdBy,
             IsCompleted = false,
-            AssignedTo = request.AssignedTo.Equals(request.CreatedBy)
-                            ? _userRepository.AttachUser(request.CreatedBy).Entity : request.AssignedTo,
+            AssignedTo = assignedTo,
             DueDate = request.DueDate
         };
         return await _taskRepository.CreateTaskAsync(task);
