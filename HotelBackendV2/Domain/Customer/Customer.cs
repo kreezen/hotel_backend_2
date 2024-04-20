@@ -5,6 +5,7 @@ namespace Domain.Customer;
 public class Customer
 {
     public Guid Id { get; set; }
+    public required string Email { get; set; }
     public required List<Activity> Activities { get; set; }
     public required string CustomerNumber { get; set; }
     public CustomerType CustomerType { get; set; }

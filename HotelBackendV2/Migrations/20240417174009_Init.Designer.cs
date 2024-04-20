@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HotelBackendV2.Migrations
 {
     [DbContext(typeof(HotelDbContext))]
-    [Migration("20240415152636_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20240417174009_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -88,9 +88,8 @@ namespace HotelBackendV2.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("ZipCode")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("ZipCode")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -117,6 +116,10 @@ namespace HotelBackendV2.Migrations
                         .IsRequired()
                         .HasMaxLength(8)
                         .HasColumnType("character varying(8)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("FirstName")
                         .IsRequired()

@@ -18,6 +18,7 @@ public class CreateCustomerHandler : ICommandHandler<CreateCustomerCommand, Cust
     {
         var customer = new Customer
         {
+            Email = request.Email,
             Id = Guid.NewGuid(),
             CustomerNumber = Guid.NewGuid().ToString(),
             Activities = new List<Activity>(),

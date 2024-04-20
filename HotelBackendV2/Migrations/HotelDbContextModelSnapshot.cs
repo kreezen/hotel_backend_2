@@ -85,9 +85,8 @@ namespace HotelBackendV2.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("ZipCode")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("ZipCode")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -114,6 +113,10 @@ namespace HotelBackendV2.Migrations
                         .IsRequired()
                         .HasMaxLength(8)
                         .HasColumnType("character varying(8)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("FirstName")
                         .IsRequired()

@@ -38,5 +38,8 @@ public class UserRepository : IUserRepository
         return users;
     }
 
-    public Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<User> AttachUser(User user) => _dbContext.Users.Attach(user);
+    public async Task<List<User>> GetAllUsersAsync()
+    {
+        return await _dbContext.Users.ToListAsync();
+    }
 }
