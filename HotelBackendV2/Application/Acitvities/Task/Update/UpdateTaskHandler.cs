@@ -1,3 +1,4 @@
+using MediatR;
 using SharedKernel;
 using Task = Domain.Activities.Task;
 public class UpdateTaskHandler : ICommandHandler<UpdateTaskCommand, Task>
@@ -17,7 +18,7 @@ public class UpdateTaskHandler : ICommandHandler<UpdateTaskCommand, Task>
         var oldTask = await _taskRepository.GetTaskByIdAsync(request.Id);
         if (oldTask == null)
         {
-            return (Result<Task>)Result.Failure(Error.NotFound("Task.NotFound", "Task not found"));
+            return Result.Failure<Task>(Error.NotFound("Task.NotFound", "Task not found"));
         }
 
         var modifiedBy = await _userRepository.GetByIdAsync(request.ModifiedBy.Id);
@@ -25,7 +26,7 @@ public class UpdateTaskHandler : ICommandHandler<UpdateTaskCommand, Task>
 
         if (modifiedBy == null || assignedTo == null)
         {
-            return (Result<Task>)Result.Failure(Error.NotFound("User.NotFound", "User not found"));
+            return Result.Failure<Task>(Error.NotFound("User.NotFound", "User not found"));
         }
 
         oldTask.ModifiedOn = DateTime.UtcNow;
@@ -36,7 +37,9 @@ public class UpdateTaskHandler : ICommandHandler<UpdateTaskCommand, Task>
         oldTask.IsCompleted = request.IsCompleted;
 
         await _taskRepository.SaveChangesAsync();
-        Console.WriteLine(oldTask);
-        return (Result<Task>)oldTask;
+
+        return oldTask;
     }
+
+
 }

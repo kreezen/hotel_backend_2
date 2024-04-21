@@ -16,7 +16,7 @@ public class CreateUserHandler : ICommandHandler<CreateUserCommand, User>
         var doesUserExist = await _userRepository.DoesUsernameExistAsync(user.Username);
         if (doesUserExist)
         {
-            return (Result<User>)Result<User>.Failure(Error.Conflict("User.Conflict", "User already exists"));
+            return Result.Failure<User>(Error.Conflict("User.Conflict", "User already exists"));
         }
         return await _userRepository.CreateUserAsync(user);
     }

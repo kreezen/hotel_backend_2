@@ -21,7 +21,7 @@ public class CreateTaskHandler : ICommandHandler<CreateTaskCommand, Task>
 
         if (createdBy == null || assignedTo == null)
         {
-            return (Result<Task>)Result.Failure(Error.NotFound("User.NotFound", "User not found"));
+            return Result.Failure<Task>(Error.NotFound("User.NotFound", "User not found"));
         }
 
         var task = new Task

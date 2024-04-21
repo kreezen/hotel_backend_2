@@ -17,10 +17,10 @@ public class GetByUsernameHandler : IQueryHandler<GetByUsernameQuery, User>
         var user = await _userRepository.GetByUsernameAsync(query.Username);
         if (user == null)
         {
-            return (Result<User>)Result<User>.Failure(Error.NotFound("User.NotFound", "User not found"));
+            return Result.Failure<User>(Error.NotFound("User.NotFound", "User not found"));
         }
 
-        return Result<User>.Success(user);
+        return user;
     }
 
 

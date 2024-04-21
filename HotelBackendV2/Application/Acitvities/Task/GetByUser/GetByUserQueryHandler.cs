@@ -18,7 +18,7 @@ public class GetByUserQueryHandler : IQueryHandler<GetByUserQuery, IEnumerable<T
         var tasks = await _taskRepository.GetTasksByUserAsync(request.User);
         if (tasks == null)
         {
-            return (Result<IEnumerable<Task>>)Result.Failure(Error.NotFound("Tasks.NotFound", "Tasks not found"));
+            return Result.Failure<IEnumerable<Task>>(Error.NotFound("Tasks.NotFound", "Tasks not found"));
         }
         return (Result<IEnumerable<Task>>)tasks;
 
