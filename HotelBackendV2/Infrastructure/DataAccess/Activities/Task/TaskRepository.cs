@@ -46,7 +46,7 @@ public class TaskRepository : ITaskRepository
 
     public async Task<Task?> GetTaskByIdAsync(Guid id)
     {
-        return await _dbContext.Tasks.FirstOrDefaultAsync(t => t.Id == id);
+        return await _dbContext.Tasks.Include(t => t.CreatedBy).FirstOrDefaultAsync(t => t.Id == id);
     }
 
 }

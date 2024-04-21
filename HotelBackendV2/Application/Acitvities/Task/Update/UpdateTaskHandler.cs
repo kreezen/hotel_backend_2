@@ -36,6 +36,7 @@ public class UpdateTaskHandler : ICommandHandler<UpdateTaskCommand, Task>
         oldTask.IsCompleted = request.IsCompleted;
 
         await _taskRepository.SaveChangesAsync();
+        Console.WriteLine(oldTask);
         return (Result<Task>)oldTask;
     }
 }
