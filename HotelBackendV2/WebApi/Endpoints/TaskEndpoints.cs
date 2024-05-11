@@ -10,6 +10,16 @@ public static class TaskEndpoints
             return result.IsSuccess ? Results.Ok(result.Value) : result.ToProblemDetails();
         });
 
+        app.MapDelete("api/activities/task/delete/{id}", async (Guid id, ISender sender) =>
+        {
+            var command = new DeleteTaskCommand
+            {
+                Id = id
+            };
+            var result = await sender.Send(command);
+            return result.IsSuccess ? Results.Ok(result.Value) : result.ToProblemDetails();
+        });
+
         app.MapGet("api/activities/task", async (ISender sender) =>
         {
             var command = new GetAllTaskQuery();

@@ -49,5 +49,9 @@ public class TaskRepository : ITaskRepository
         return await _dbContext.Tasks.Include(t => t.CreatedBy).FirstOrDefaultAsync(t => t.Id == id);
     }
 
+    public async Task<int> DeleteTaskAsync(Guid id)
+    {
+        return await _dbContext.Tasks.Where(t => t.Id == id).ExecuteDeleteAsync();
+    }
 }
 

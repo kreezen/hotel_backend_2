@@ -20,7 +20,21 @@ public static class CustomerEndpoints
             return result.IsSuccess ? Results.Ok(result.Value) : result.ToProblemDetails();
         });
 
+        app.MapPost("api/customers/update", async (UpdateCustomerCommand command, ISender sender) =>
+        {
+            var result = await sender.Send(command);
+            return result.IsSuccess ? Results.Ok(result.Value) : result.ToProblemDetails();
+        });
 
+        app.MapDelete("api/customers/delete/{id}", async (Guid id, ISender sender) =>
+        {
+            var command = new DeleteCustomerCommand
+            {
+                Id = id
+            };
+            var result = await sender.Send(command);
+            return result.IsSuccess ? Results.Ok(result.Value) : result.ToProblemDetails();
+        });
 
         app.MapGet("api/customers", async (ISender sender) =>
         {

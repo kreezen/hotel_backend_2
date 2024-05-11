@@ -8,5 +8,6 @@ public interface IUserRepository
     Task<bool> DoesUsernameExistAsync(string username);
     Task<List<User>> GetUsersBySubstringAsync(string substring);
 
+    Task<int> DeleteUserAsync(Guid id);
 
 }

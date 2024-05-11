@@ -10,6 +10,16 @@ public static class UserEndpoints
             return result.IsSuccess ? Results.Ok(result.Value) : result.ToProblemDetails();
         });
 
+        app.MapDelete("api/users/delete/{id}", async (Guid id, ISender sender) =>
+        {
+            var command = new DeleteUserCommand
+            {
+                Id = id
+            };
+            var result = await sender.Send(command);
+            return result.IsSuccess ? Results.Ok(result.Value) : result.ToProblemDetails();
+        });
+
         app.MapGet("api/users/{username}", async (String username, ISender sender) =>
         {
             var query = new GetByUsernameQuery

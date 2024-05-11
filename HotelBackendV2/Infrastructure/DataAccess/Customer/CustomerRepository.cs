@@ -2,6 +2,7 @@ using Domain.Customer;
 using Domain.Activities;
 using Microsoft.EntityFrameworkCore;
 using Task = Domain.Activities.Task;
+using System.Runtime.CompilerServices;
 
 public class CustomerRepository : ICustomerRepository
 {
@@ -53,8 +54,23 @@ public class CustomerRepository : ICustomerRepository
         return await _dbContext.Customers.FirstOrDefaultAsync(x => x.CustomerNumber == customerNumber);
     }
 
+    public async Task<Customer?> GetCustomerByIdAsync(Guid id)
+    {
+        return await _dbContext.Customers.Include(x => x.Address).FirstOrDefaultAsync(x => x.Id == id);
+    }
+
     public async Task<List<Customer>> GetCustomersBySubstringAsync(string substring)
     {
         return await _dbContext.Customers.Where(x => x.LastName.ToLower().Contains(substring.ToLower())).ToListAsync();
+    }
+
+    public async Task<int> SaveChangesAsync()
+    {
+        return await _dbContext.SaveChangesAsync();
+    }
+
+    public async Task<int> DeleteCustomerAsync(Guid id)
+    {
+        return await _dbContext.Customers.Where(x => x.Id == id).ExecuteDeleteAsync();
     }
 }

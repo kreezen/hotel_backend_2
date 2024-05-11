@@ -42,4 +42,9 @@ public class UserRepository : IUserRepository
     {
         return await _dbContext.Users.ToListAsync();
     }
+
+    public async Task<int> DeleteUserAsync(Guid id)
+    {
+        return await _dbContext.Users.Where(x => x.Id == id).ExecuteDeleteAsync();
+    }
 }

@@ -10,5 +10,5 @@ public interface ITaskRepository
     Task<Task?> GetTaskByIdAsync(Guid id);
     Task<int> SaveChangesAsync();
     Task<List<Task>> GetAllTaksAsync();
-
+    Task<int> DeleteTaskAsync(Guid id);
 }
