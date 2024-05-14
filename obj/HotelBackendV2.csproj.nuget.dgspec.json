@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vonVon\\hotel_backend_v2\\HotelBackendV2\\HotelBackendV2.csproj": {}
+    "C:\\Users\\vonVon\\hotel_backend_v2\\HotelBackendV2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vonVon\\hotel_backend_v2\\HotelBackendV2\\HotelBackendV2.csproj": {
+    "C:\\Users\\vonVon\\hotel_backend_v2\\HotelBackendV2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vonVon\\hotel_backend_v2\\HotelBackendV2\\HotelBackendV2.csproj",
+        "projectUniqueName": "C:\\Users\\vonVon\\hotel_backend_v2\\HotelBackendV2.csproj",
         "projectName": "HotelBackendV2",
-        "projectPath": "C:\\Users\\vonVon\\hotel_backend_v2\\HotelBackendV2\\HotelBackendV2.csproj",
+        "projectPath": "C:\\Users\\vonVon\\hotel_backend_v2\\HotelBackendV2.csproj",
         "packagesPath": "C:\\Users\\vonVon\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vonVon\\hotel_backend_v2\\HotelBackendV2\\obj\\",
+        "outputPath": "C:\\Users\\vonVon\\hotel_backend_v2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\vonVon\\AppData\\Roaming\\NuGet\\NuGet.Config",
