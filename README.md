@@ -1,0 +1,1 @@
+# More sophisticated Hotel Api
